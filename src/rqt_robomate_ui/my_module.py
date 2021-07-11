@@ -8,8 +8,10 @@ from python_qt_binding.QtCore import Qt, Slot
 from python_qt_binding.QtWidgets import QWidget
 from std_msgs.msg import Float32
  
+Escritorios = [False,False,False,False,False,False]
+
 class MyPlugin(Plugin):
- 
+    
     def __init__(self, context):
         super(MyPlugin, self).__init__(context)
         # Give QObjects reasonable names
@@ -46,6 +48,7 @@ class MyPlugin(Plugin):
         # Callback to actions
         self._widget.pushButton_1.clicked.connect(self.add_button_clicked)
         self._widget.pushButton_2.clicked.connect(self.remove_button_clicked)
+        self._widget.spinBox.valueChanged.connect(self.spinBox_valueChanged)
         self._widget.spinBox.setRange(1,6)
         
         # Add widget to the user interface
@@ -53,16 +56,32 @@ class MyPlugin(Plugin):
         # Create topic for node comunication
         self.pub = rospy.Publisher("/robomate/ui", Float32, queue_size=10)
     
- 
+
     @Slot()
     def add_button_clicked(self):
+        arg = self._widget.spinBox.value()
         print("Usuario inscripto en la lista.")
         self.pub.publish(self._widget.spinBox.value())
+        Escritorios[arg-1]=True
+        self._widget.pushButton_1.setEnabled(0)
 
     def remove_button_clicked(self):
+        arg = self._widget.spinBox.value()
         msg = - self._widget.spinBox.value()
         print("Usuario eliminado de la lista.")
         self.pub.publish(msg)
+        Escritorios[arg-1]=False
+        self._widget.pushButton_1.setEnabled(1)
+
+    def spinBox_valueChanged(self):
+
+        arg = self._widget.spinBox.value()
+
+        if Escritorios[arg-1]==True:
+            self._widget.pushButton_1.setEnabled(0)
+        else:
+            self._widget.pushButton_1.setEnabled(1)
+        
 
     def shutdown_plugin(self):
         # TODO unregister all publishers here
