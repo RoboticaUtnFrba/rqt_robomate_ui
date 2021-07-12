@@ -8,7 +8,7 @@ from python_qt_binding.QtCore import Qt, Slot
 from python_qt_binding.QtWidgets import QWidget
 from std_msgs.msg import Float32
  
-Escritorios = [False,False,False,False,False,False]
+Escritorios = [False,False,False,False,False,False,False,False,False]
 
 class MyPlugin(Plugin):
     
@@ -49,7 +49,7 @@ class MyPlugin(Plugin):
         self._widget.pushButton_1.clicked.connect(self.add_button_clicked)
         self._widget.pushButton_2.clicked.connect(self.remove_button_clicked)
         self._widget.spinBox.valueChanged.connect(self.spinBox_valueChanged)
-        self._widget.spinBox.setRange(1,6)
+        self._widget.spinBox.setRange(1,9)
         
         # Add widget to the user interface
         context.add_widget(self._widget)
@@ -60,18 +60,20 @@ class MyPlugin(Plugin):
     @Slot()
     def add_button_clicked(self):
         arg = self._widget.spinBox.value()
-        print("Usuario inscripto en la lista.")
+        print("Usuario inscripto en la lista",self._widget.spinBox.value())
         self.pub.publish(self._widget.spinBox.value())
-        Escritorios[arg-1]=True
         self._widget.pushButton_1.setEnabled(0)
+        self._widget.pushButton_2.setEnabled(1)
+        Escritorios[arg-1] = True
 
     def remove_button_clicked(self):
         arg = self._widget.spinBox.value()
         msg = - self._widget.spinBox.value()
-        print("Usuario eliminado de la lista.")
         self.pub.publish(msg)
-        Escritorios[arg-1]=False
+        print("Usuario eliminado de la lista",msg)
         self._widget.pushButton_1.setEnabled(1)
+        self._widget.pushButton_2.setEnabled(0)
+        Escritorios[arg-1] = False
 
     def spinBox_valueChanged(self):
 
@@ -79,8 +81,10 @@ class MyPlugin(Plugin):
 
         if Escritorios[arg-1]==True:
             self._widget.pushButton_1.setEnabled(0)
+            self._widget.pushButton_2.setEnabled(1)
         else:
             self._widget.pushButton_1.setEnabled(1)
+            self._widget.pushButton_2.setEnabled(0)
         
 
     def shutdown_plugin(self):
