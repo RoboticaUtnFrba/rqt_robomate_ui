@@ -1,7 +1,7 @@
 <library path="src">
-  <class name="My plugin" type="rqt_robomate_ui.my_module.MyPlugin" base_class_type="rqt_gui_py::Plugin">
+  <class name="RoboMate app" type="rqt_robomate_ui.my_module.MyPlugin" base_class_type="rqt_gui_py::Plugin">
     <description>
-      A Python GUI plugin for test the functionalities.
+      A Python GUI plugin for the iRobot Create 2.
     </description>
     <qtgui>
       <group>
@@ -11,7 +11,7 @@
       </group>
       <label>My plugin label</label>
       <icon type="theme">applications-other</icon>
-      <statustip>A Python GUI plugin for test the functionalities.</statustip>
+      <statustip>A Python GUI plugin for the iRobot Create 2.</statustip>
     </qtgui>
   </class>
 </library>

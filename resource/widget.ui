@@ -474,7 +474,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../Iconos/robot.png</pixmap>
+        <pixmap>../icons/robot.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -505,7 +505,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../Iconos/LogoMakr-7IYlrT.png</pixmap>
+        <pixmap>../icons/LogoMakr-7IYlrT.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -1010,7 +1010,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../Iconos/mate.png</normaloff>../Iconos/mate.png</iconset>
+         <normaloff>../icons/mate.png</normaloff>../icons/mate.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1472,7 +1472,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../Iconos/sin-parar.png</normaloff>../Iconos/sin-parar.png</iconset>
+         <normaloff>../icons/sin-parar.png</normaloff>../icons/sin-parar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
